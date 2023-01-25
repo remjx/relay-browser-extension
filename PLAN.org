@@ -1,0 +1,33 @@
+* [0/2] Day 1
+  - [ ] Extension builds
+  - [ ] Popup with link to relayx.com/wallet
+
+* [0/3] Day 2
+  - [ ] inject window.relayone
+  - [ ] update relayone to forfeit loading the frame if extension is present
+  - [ ] window.relayone <-> extension messaging
+
+* [0/2] Day 3
+  - [ ] [0/6] implement minimal viable relayone interface
+    - [ ] seed
+    - [ ] send
+    - [ ] encrypt
+    - [ ] decrypt
+    - [ ] sign
+    - [ ] authbeta (?)
+  - [ ] Store seed
+
+* [0/2] Day 4
+  - [ ] Implement relay wallet machinery that uses the seed
+  - [ ] Render permission popups
+
+* [0/1] Day 5
+  - [ ] Testing
+
+* [0/1] Day 6
+  - [ ] Production build tooling
+
+* [0/1] Day 7
+  - [ ] Rest
+  - [ ] Nice to have: relayone.render() stub
+
