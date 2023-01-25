@@ -1,8 +1,12 @@
 {
+  "manifest_version": 2,
+  "name": "Relayone Extension",
+  "version": "0.1.0",
   "background": {
     "scripts": [
       "background/index.ts"
-    ]
+    ],
+    "persistent": true
   },
   "content_scripts": [
     {
@@ -12,16 +16,12 @@
       "matches": [
         "https://*/*",
         "http://*/*"
-      ]
+      ],
+      "run_at": "document_start"
     }
   ],
   "web_accessible_resources": ["inject.ts"],
-  "browser_action": {
-    "default_popup": "pages/popup/index.html"
-  },
-  "name": "stag",
   "permissions": [
-    "tabs",
     "activeTab"
   ]
 }
