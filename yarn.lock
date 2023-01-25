@@ -981,6 +981,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webextension-polyfill@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "@types/webextension-polyfill@npm:0.10.0"
+  checksum: 1c6d0b3f6f1b1ba666c86d78d6bf079a5382e0c3084a307021ed19dc711a9fc044d82417e322ce403782e343b0fead8ad46db8d97ea19011fb1d85157e2b9d7f
+  languageName: node
+  linkType: hard
+
 "abbrev@npm:^1.0.0":
   version: 1.1.1
   resolution: "abbrev@npm:1.1.1"
@@ -2528,6 +2535,7 @@ __metadata:
   resolution: "relayone-extension@workspace:."
   dependencies:
     "@parcel/config-webextension": ^2.8.3
+    "@types/webextension-polyfill": ^0.10.0
     parcel: ^2.8.3
     tslib: ^2.4.1
     typescript: ^4.9.4

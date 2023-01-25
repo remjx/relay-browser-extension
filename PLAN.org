@@ -1,6 +1,6 @@
-* [0/2] Day 1
-  - [ ] Extension builds
-  - [ ] Popup with link to relayx.com/wallet
+* [2/2] Day 1
+  - [X] Extension builds
+  - [X] Popup with link to relayx.com/wallet
 
 * [0/3] Day 2
   - [ ] inject window.relayone
