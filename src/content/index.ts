@@ -1,11 +1,22 @@
+import * as messaging from '@relayx/frame-messaging/lib/frameMessaging'
+import uuid from 'uuid-random';
 import ext from 'webextension-polyfill'
 
 const messages: { [key: string]: (payload: unknown) => unknown } = {}
 
 if (shouldInject()) {
-    injectScript(ext.runtime.getURL('inpage.js'))
+    injectScript(ext.runtime.getURL('inject.js'))
 
     const myPort = ext.runtime.connect({ name: 'relayone' });
+    messaging.init(window, async (origin, method, params) => {
+        console.log(origin, method, params)
+        const id = uuid();
+        myPort.postMessage({ method, params, id})
+        return new Promise(resolve => {
+            messages[id] = resolve;
+        });
+    })
+
     myPort.onMessage.addListener(data => {
         if (messages[data.id]) {
             messages[data.id](data.payload);
@@ -27,7 +38,6 @@ function injectScript(file_path: string) {
     } catch (e) {
         console.error('RelayOne: Provider injection failed.', e);
     }
-
 }
 
 // some MIT metamask checks

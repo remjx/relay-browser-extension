@@ -2,10 +2,11 @@
   - [X] Extension builds
   - [X] Popup with link to relayx.com/wallet
 
-* [0/3] Day 2
-  - [ ] inject window.relayone
-  - [ ] update relayone to forfeit loading the frame if extension is present
-  - [ ] window.relayone <-> extension messaging
+* [3/3] Day 2
+  - [X] inject window.relayone
+  - [X] update relayone to forfeit loading the frame if extension is present
+    this need more work on relay side, because relay project do not inject relayone.js
+  - [X] window.relayone <-> extension messaging
 
 * [0/2] Day 3
   - [ ] [0/6] implement minimal viable relayone interface
@@ -17,7 +18,8 @@
     - [ ] authbeta (?)
   - [ ] Store seed
 
-* [0/2] Day 4
+* [0/3] Day 4
+  - [ ] Changes to relayone-client to support talking to extension
   - [ ] Implement relay wallet machinery that uses the seed
   - [ ] Render permission popups
 
