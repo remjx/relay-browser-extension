@@ -1,6 +1,8 @@
 import { reverseBuffer } from "@relayx/crypto/lib/bitcoin/BufferWriter";
 import { sha256sha256 } from '@relayx/crypto/lib/bitcoin/crypto'
 import { sign } from "@relayx/crypto/lib/bitcoin/signature";
+import { sign as signMessage } from "@relayx/crypto/lib/bitcoin/message";
+
 import { WhiteList } from "@relayx/wallet/lib/api";
 import { KeyStorage, NetworkApi } from "@relayx/wallet/lib/auth";
 import { POST } from './http'
@@ -47,7 +49,7 @@ const net: NetworkApi = {
         meta: {
           sender: paymail,
           pubkey: identityKey.toPublicKey().toString(),
-          signature: sign(txid, identityKey)
+          signature: signMessage(txid, identityKey)
         }
       },
     );
