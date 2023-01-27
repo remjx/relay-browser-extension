@@ -8,23 +8,25 @@
     this need more work on relay side, because relay project do not inject relayone.js
   - [X] window.relayone <-> extension messaging
 
-* [0/2] Day 3
-  - [ ] [0/6] implement minimal viable relayone interface
-    - [ ] seed
+* [1/2] Day 3
+  - [-] [1/6] implement minimal viable relayone interface
+    - [X] seed
     - [ ] send
     - [ ] encrypt
     - [ ] decrypt
     - [ ] sign
     - [ ] authbeta (?)
-  - [ ] Store seed
+  - [X] Store seed
 
 * [0/3] Day 4
   - [ ] Changes to relayone-client to support talking to extension
   - [ ] Implement relay wallet machinery that uses the seed
   - [ ] Render permission popups
 
-* [0/1] Day 5
-  - [ ] Testing
+* [0/3] Day 5: Testing
+  - [ ] Firefox
+  - [ ] Chrome
+  - [ ] Brave
 
 * [0/1] Day 6
   - [ ] Production build tooling
@@ -32,4 +34,5 @@
 * [0/1] Day 7
   - [ ] Rest
   - [ ] Nice to have: relayone.render() stub
+  - [ ] Consider password protecting the seed and not giving entropy to relay UI
 
