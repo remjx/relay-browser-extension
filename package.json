@@ -13,13 +13,14 @@
   "dependencies": {
     "@relayx/crypto": "^6.1.5",
     "@relayx/frame-messaging": "^1.1.1",
-    "@relayx/wallet": "^5.0.3",
+    "@relayx/wallet": "^5.0.4",
     "parcel": "^2.8.3",
     "uuid-random": "^1.3.2",
     "webextension-polyfill": "^0.10.0"
   },
   "devDependencies": {
     "@parcel/config-webextension": "^2.8.3",
+    "@types/node": "^18.11.18",
     "@types/webextension-polyfill": "^0.10.0",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4"
