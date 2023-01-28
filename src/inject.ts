@@ -137,9 +137,19 @@ const RelayOneClient = {
         },
     },
     alpha: {
+        // Some people still use this to query balances
         run: {
             async getOwner() {
                 return checkAndCall('run-owner', {})
+            },
+            async broadcast() {
+                throw new Error('Not implemented')
+            },
+            async pay() {
+                throw new Error('Not implemented')
+            },
+            async sign() {
+                throw new Error('Not implemented')
             }
         }
     }
