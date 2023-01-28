@@ -4,16 +4,24 @@ import { sign as signMessage } from "@relayx/crypto/lib/bitcoin/message";
 
 import { WhiteList } from "@relayx/wallet/lib/api";
 import { KeyStorage, NetworkApi } from "@relayx/wallet/lib/auth";
+import { Utxo } from "@relayx/wallet/lib/utxo";
 import { POST } from './http'
 import keys from './keys'
+
+async function getUtxos(): Promise<Utxo[]> {
+  const data = await POST("/v1/utxo", {});
+  if (data.code !== 0) {
+    throw new Error("Failed to fetch utxo");
+  }
+  return data.data;
+}
 
 const net: NetworkApi = {
   async getUtxos(keys: KeyStorage) {
     if (!keys.hasKeys()) {
       return [];
     }
-    return []
-    // return getUtxos(keys);
+    return getUtxos();
   },
   async getExchangeRate(): Promise<number> {
     const url = "https://api.relayx.com/v1/common/rate";

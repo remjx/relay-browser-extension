@@ -16,8 +16,7 @@ ext.runtime.onConnect.addListener((remotePort) => {
       const url = new URL(remotePort.sender.url);
       remotePort.onMessage.addListener(async (msg) => {
         console.log("Backgroud received", msg, url.host)
-        const response = await callWalletMethod(msg.method, msg.params || {}, origin, keys, net, permissions);
-
+        const response = await callWalletMethod(msg.method, msg.params || {}, url.host, keys, net, permissions);
         remotePort.postMessage({id: msg.id, payload: response})
       });
     }

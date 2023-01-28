@@ -6,25 +6,25 @@ const permissions: Permissions = {
     return +new Date()
   },
   async askSend(origing: string, value: number): Promise<boolean> {
-    return false
+    return true
   },
   async askAllowance(origing: string): Promise<boolean> {
-    return false
+    return true
   },
   async askRun(origin: string, metadata: RunClsMetadata | null): Promise<boolean> {
-    return false
+    return true
   },
   async askBitcom(origin: string, app: string): Promise<boolean> {
-    return false
+    return true
   },
   async getAllowance(origin: string): Promise<number> {
-    return 0
+    return 100000000000000
   },
   async setAllowance(origin: string, sats: number): Promise<any> {
     return
   },
   async isTrusted(origin: string): Promise<boolean> {
-    return false
+    return true
   }
 }
 export default permissions

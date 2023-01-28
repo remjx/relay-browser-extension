@@ -23,5 +23,5 @@ export async function POST<T>(
           : JSON.stringify(params)
   });
   const data = await result.json();
-  return { data };
+  return data ;
 }

@@ -1,6 +1,34 @@
-import {init} from '@relayx/frame-messaging/lib/frameMessaging'
+import uuid from 'uuid-random'
+const messages: { [key: string]: (response: any) => void } = {};
 
-const send = init(window, async () => {})!
+function send<T = { error?: string }>(
+    call: string,
+    payload?: any
+) {
+    return new Promise<T>((resolve) => {
+        const callId = uuid();
+        messages[callId] = resolve;
+        window.postMessage({ relay: "relay", call, params: { id: callId, payload } });
+    });
+}
+
+window.addEventListener('message', (message: MessageEvent) => {
+    if (message.data.relay !== "relay") {
+        return;
+    }
+
+    if (message.data.call === "reply") {
+        const id = message.data.params.id as string;
+        if (messages.hasOwnProperty(id)) {
+            const cb = messages[id];
+            delete messages[id];
+            cb(message.data.params.payload);
+            return;
+        }
+        return;
+    }
+})
+
 
 async function checkAndCall<T>(method: string, params: T): Promise<any> {
     const linked = await RelayOneClient.isLinked();
@@ -94,11 +122,11 @@ const RelayOneClient = {
     decrypt: async (message: string) => {
         return checkAndCall("decrypt", { message });
     },
-    
+
     getBalance: async () => {
         return checkAndCall("getBalance", {});
     },
-    
+
     getBalance2: async () => {
         return checkAndCall("getBalance2", {});
     },
@@ -108,6 +136,13 @@ const RelayOneClient = {
             return !!e && e.message === "Low funds";
         },
     },
+    alpha: {
+        run: {
+            async getOwner() {
+                return checkAndCall('run-owner', {})
+            }
+        }
+    }
 };
 
 console.log("INJECTED");

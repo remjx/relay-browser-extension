@@ -27,6 +27,7 @@
     "inject.ts"
   ],
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ]
 }

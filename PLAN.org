@@ -9,9 +9,9 @@
   - [X] window.relayone <-> extension messaging
 
 * [1/2] Day 3
-  - [-] [1/6] implement minimal viable relayone interface
+  - [-] [2/6] implement minimal viable relayone interface
     - [X] seed
-    - [ ] send
+    - [X] send
     - [ ] encrypt
     - [ ] decrypt
     - [ ] sign

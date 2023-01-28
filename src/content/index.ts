@@ -9,7 +9,6 @@ if (shouldInject()) {
 
     const myPort = ext.runtime.connect({ name: 'relayone' });
     messaging.init(window, async (origin, method, params) => {
-        console.log(origin, method, params)
         const id = uuid();
         myPort.postMessage({ method, params, id})
         return new Promise(resolve => {

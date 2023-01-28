@@ -50,7 +50,7 @@ export async function getKeys(entropy: string): Promise<KEYS> {
 }
 const keys: KeyStorage = {
   async hasKeys(): Promise<boolean> {
-    return !!this.getEntropy()
+    return !!(await this.getEntropy())
   },
   async getEntropy(): Promise<string> {
     const result = await ext.storage.local.get('ENTROPY')
