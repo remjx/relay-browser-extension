@@ -24,7 +24,9 @@
     }
   ],
   "web_accessible_resources": [
-    "inject.ts"
+    "inject.ts",
+    "background/popup.html",
+    "background/popup_.ts"
   ],
   "permissions": [
     "activeTab",

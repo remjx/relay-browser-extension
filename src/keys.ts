@@ -7,7 +7,8 @@ import {SIGHASH_ALL, SIGHASH_FORKID} from '@relayx/crypto/lib/bitcoin/sighash'
 import { serialize } from '@relayx/crypto/lib/bitcoin/script';
 import BufferWriter from '@relayx/crypto/lib/bitcoin/BufferWriter';
 import { KeyStorage } from "@relayx/wallet/lib/auth";
-
+import {get, set} from './storage'
+ 
 const cache = new Map<string, KEYS>();
 
 interface KEYS {
@@ -53,14 +54,13 @@ const keys: KeyStorage = {
     return !!(await this.getEntropy())
   },
   async getEntropy(): Promise<string> {
-    const result = await ext.storage.local.get('ENTROPY')
-    return result['ENTROPY']
+    return get<string>('ENTROPY')
   },
   async auth(
     paymail: string,
     entropy: string
   ): Promise<boolean> {
-    await ext.storage.local.set({ 'ENTROPY': entropy, 'PAYMAIL': paymail })
+    await set({ 'ENTROPY': entropy, 'PAYMAIL': paymail })
     return true
   },
   async logout(): Promise<boolean> {
@@ -74,7 +74,7 @@ const keys: KeyStorage = {
     const keys = getKeys(await this.getEntropy())
     return {
       identityKey: (await keys).identity,
-      paymail: (await ext.storage.local.get('PAYMAIL'))['PAYMAIL']
+      paymail: (await get<string>('PAYMAIL'))
     }
   },
   async getRunOwner(): Promise<PrivateKey> {

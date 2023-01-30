@@ -5,31 +5,32 @@
 * [3/3] Day 2
   - [X] inject window.relayone
   - [X] update relayone to forfeit loading the frame if extension is present
-    this need more work on relay side, because relay project do not inject relayone.js
   - [X] window.relayone <-> extension messaging
 
-* [1/2] Day 3
-  - [-] [2/6] implement minimal viable relayone interface
+* [2/2] Day 3
+  - [X] [6/6] implement minimal viable relayone interface
     - [X] seed
     - [X] send
-    - [ ] encrypt
-    - [ ] decrypt
-    - [ ] sign
-    - [ ] authbeta (?)
+    - [X] encrypt
+    - [X] decrypt
+    - [X] sign
+    - [X] authbeta
   - [X] Store seed
 
-* [0/3] Day 4
-  - [ ] Changes to relayone-client to support talking to extension
-  - [ ] Implement relay wallet machinery that uses the seed
+* [2/3] Day 4
+  - [X] Changes to relayone-client to support talking to extension
+  - [X] Implement relay wallet machinery that uses the seed
   - [ ] Render permission popups
 
-* [0/3] Day 5: Testing
+* [1/4] Day 5: Testing
+  - [X] Permissions logic
   - [ ] Firefox
   - [ ] Chrome
   - [ ] Brave
 
 * [0/1] Day 6
   - [ ] Production build tooling
+  - [ ] deploy new relayone-client on relayx.com 
 
 * [0/1] Day 7
   - [ ] Rest
