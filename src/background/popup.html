@@ -4,12 +4,92 @@
 <head>
     <script src="./popup_.ts" type="module">
     </script>
+    <style>
+        .popup {
+            margin: 0 auto;
+            margin: 20px;
+            width: 100%;
+            height: 100%;
+            background: rgb(47, 59, 82);
+            font-family:
+                -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            width: 120px;
+            height: 20px;
+            display: block;
+            margin: 20px auto
+        }
+
+        .body {
+            color: white;
+            line-height: 22px;
+            font-size: 16px;
+        }
+
+        .button-row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button {
+            text-align: center;
+            color: white;
+            display: block;
+            border: 0;
+            text-decoration: none;
+            padding: 7px;
+            width: 110px;
+            margin: 5px;
+            border-radius: 2px;
+            font-size: 12pt;
+            cursor: "pointer";
+        }
+
+        .yes {
+            background-color: rgb(17, 26, 44);
+        }
+
+        .no {
+            background-color: rgb(17, 26, 44);
+        }
+
+        .prompt {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .list {
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+
+        .body {
+            color: white;
+            line-height: 22px;
+            font-size: 16px
+        }
+    </style>
 </head>
 
 <body>
-    <div width="300">
-        <button id="approve">Approve</button>
-        <button id='cancel'>Cancel</button>
+    <div class="popup">
+        <img class="logo" src="../logo-header.png" alt="RelayOne logo" />
+        <div class="body">
+            <div class="button-row">
+                <button id="approve" class="button yes">
+                    Approve
+                </button>
+                <button id="cancel" class="button no">
+                    Cancel
+                </button>
+            </div>
+        </div>
 
     </div>
 </body>

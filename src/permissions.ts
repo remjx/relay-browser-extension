@@ -23,7 +23,7 @@ const permissions: Permissions = {
     let date = await get<number>(key);
 
     if (!date) {
-      const result = await showPopup("ask-authorization");
+      const result = await showPopup("ask-authorization", {origin});
       if (result === true) {
         await set({ key: +new Date })
         return get<number>(key)
@@ -43,7 +43,7 @@ const permissions: Permissions = {
     });
   },
   async askAllowance(origin: string): Promise<boolean> {
-    const result = await showPopup('ask-allowance')
+    const result = await showPopup('ask-allowance', {origin})
     const key = `AS_${origin}`
     if (result) {
       set({ [key]: 10000000 })
@@ -55,7 +55,7 @@ const permissions: Permissions = {
     if (isTrusted) {
       return true;
     }
-    return await showPopop( "ask-run", {
+    return await showPopup( "ask-run", {
       origin,
       metadata
     });
