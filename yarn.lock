@@ -472,6 +472,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@parcel/optimizer-data-url@npm:2.8.3":
+  version: 2.8.3
+  resolution: "@parcel/optimizer-data-url@npm:2.8.3"
+  dependencies:
+    "@parcel/plugin": 2.8.3
+    "@parcel/utils": 2.8.3
+    isbinaryfile: ^4.0.2
+    mime: ^2.4.4
+  checksum: 5df8d888269f7f3dfaa7bd3fb4f11d2d02ab8665404c50e99534231664fb4fd0b5be3f80cab513ef217e29cda9f91d77f5c649cfe6d227c34d48d422df52901f
+  languageName: node
+  linkType: hard
+
 "@parcel/optimizer-htmlnano@npm:2.8.3":
   version: 2.8.3
   resolution: "@parcel/optimizer-htmlnano@npm:2.8.3"
@@ -778,6 +790,15 @@ __metadata:
   peerDependencies:
     "@parcel/core": ^2.8.3
   checksum: f4b3464828e1b3d44e7da5c7a71272f5f53f830d9bb371e8dd8b2f32040f4426f3efeae12949947e34b39f7755a253f0b48c6eeec6d86ad43baf0b30717f1f47
+  languageName: node
+  linkType: hard
+
+"@parcel/transformer-inline-string@npm:2.8.3":
+  version: 2.8.3
+  resolution: "@parcel/transformer-inline-string@npm:2.8.3"
+  dependencies:
+    "@parcel/plugin": 2.8.3
+  checksum: 23fa279e1fb0acb0439bfa03d908362796f2c81e911c52f38b8818f4240f4c35b4c236e4e46550def9140c4269456bba104f63ed8f1b713d08ef0276f2758e6b
   languageName: node
   linkType: hard
 
@@ -1940,6 +1961,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"isbinaryfile@npm:^4.0.2":
+  version: 4.0.10
+  resolution: "isbinaryfile@npm:4.0.10"
+  checksum: a6b28db7e23ac7a77d3707567cac81356ea18bd602a4f21f424f862a31d0e7ab4f250759c98a559ece35ffe4d99f0d339f1ab884ffa9795172f632ab8f88e686
+  languageName: node
+  linkType: hard
+
 "isexe@npm:^2.0.0":
   version: 2.0.0
   resolution: "isexe@npm:2.0.0"
@@ -2161,6 +2189,15 @@ __metadata:
     braces: ^3.0.2
     picomatch: ^2.3.1
   checksum: 02a17b671c06e8fefeeb6ef996119c1e597c942e632a21ef589154f23898c9c6a9858526246abb14f8bca6e77734aa9dcf65476fca47cedfb80d9577d52843fc
+  languageName: node
+  linkType: hard
+
+"mime@npm:^2.4.4":
+  version: 2.6.0
+  resolution: "mime@npm:2.6.0"
+  bin:
+    mime: cli.js
+  checksum: 1497ba7b9f6960694268a557eae24b743fd2923da46ec392b042469f4b901721ba0adcf8b0d3c2677839d0e243b209d76e5edcbd09cfdeffa2dfb6bb4df4b862
   languageName: node
   linkType: hard
 
@@ -2636,6 +2673,8 @@ __metadata:
   resolution: "relayone-extension@workspace:."
   dependencies:
     "@parcel/config-webextension": ^2.8.3
+    "@parcel/optimizer-data-url": 2.8.3
+    "@parcel/transformer-inline-string": 2.8.3
     "@relayx/crypto": ^6.1.5
     "@relayx/frame-messaging": ^1.1.1
     "@relayx/wallet": ^5.0.4

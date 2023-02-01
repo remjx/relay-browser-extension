@@ -8,6 +8,7 @@
   "scripts": {
     "start": "parcel watch --no-hmr src/manifest.json",
     "build": "parcel build src/manifest.json",
+    "build-release": "rm -rf dist .parcel-cache && parcel build --no-source-maps src/manifest.json",
     "release": "cross-env NODE_ENV=production rollup -c"
   },
   "dependencies": {
@@ -21,6 +22,8 @@
   },
   "devDependencies": {
     "@parcel/config-webextension": "^2.8.3",
+    "@parcel/optimizer-data-url": "2.8.3",
+    "@parcel/transformer-inline-string": "2.8.3",
     "@types/node": "^18.11.18",
     "@types/webextension-polyfill": "^0.10.0",
     "buffer": "^5.5.0",
