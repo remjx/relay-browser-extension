@@ -25,7 +25,7 @@ const permissions: Permissions = {
     if (!date) {
       const result = await showPopup("ask-authorization", {origin});
       if (result === true) {
-        await set({ key: +new Date })
+        await set({ [key]: +new Date })
         return get<number>(key)
       }
     }
