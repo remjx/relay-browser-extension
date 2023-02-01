@@ -14,7 +14,7 @@ export async function showPopup(name: string, p: Record<string, any>): Promise<b
     console.log('creating', name)
     const id = uuid()
     params[id] = { ...p, name }
-    mutex.acquire()
+    await mutex.acquire()
     const window = await ext.windows.getCurrent();
     const wnd = await ext.windows.create({
         url: 'background/popup.html#' + id,
