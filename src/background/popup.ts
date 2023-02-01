@@ -4,8 +4,8 @@ import { Mutex } from 'async-mutex';
 
 const mutex = new Mutex();
 
-const WIDTH = 300;
-const HEIGT = 300;
+const WIDTH = 320;
+const HEIGT = 350;
 
 const pending: Record<string, any> = {}
 const params: Record<string, Record<string, any>> = {}
@@ -16,7 +16,7 @@ export async function showPopup(name: string, p: Record<string, any>): Promise<b
     params[id] = { ...p, name }
     await mutex.acquire()
     const window = await ext.windows.getCurrent();
-    const wnd = await ext.windows.create({
+    await ext.windows.create({
         url: 'background/popup.html#' + id,
         type: 'popup',
         width: WIDTH,
@@ -24,11 +24,11 @@ export async function showPopup(name: string, p: Record<string, any>): Promise<b
         top: window.top,
         left: window.width! - WIDTH,
     })
-    wnd.alwaysOnTop = true;
     return new Promise((resolve, reject) => {
         pending[id] = [resolve, reject]
     })
 }
+
 
 ext.runtime.onConnect.addListener((remotePort) => {
     let id: string;
