@@ -1,5 +1,9 @@
 import ext from 'webextension-polyfill'
 import uuid from 'uuid-random'
+import { Mutex } from 'async-mutex';
+
+const mutex = new Mutex();
+
 const WIDTH = 300;
 const HEIGT = 300;
 
@@ -10,6 +14,7 @@ export async function showPopup(name: string, p: Record<string, any>): Promise<b
     console.log('creating', name)
     const id = uuid()
     params[id] = { ...p, name }
+    mutex.acquire()
     const window = await ext.windows.getCurrent();
     const wnd = await ext.windows.create({
         url: 'background/popup.html#' + id,
@@ -49,6 +54,7 @@ ext.runtime.onConnect.addListener((remotePort) => {
                 const [resolve, _] = pending[id]
                 resolve(false)
             }
+            mutex.release();
         })
     }
 });

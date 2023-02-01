@@ -52,6 +52,7 @@ async function unLinkedCall<T>(method: string, params: T): Promise<any> {
 
 const RelayOneClient = {
     p2p: true,
+    extension: true,
     authRedirectUrl: (url: string) => {
         if (typeof url !== "string") {
             return false;

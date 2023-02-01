@@ -1128,6 +1128,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"async-mutex@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "async-mutex@npm:0.4.0"
+  dependencies:
+    tslib: ^2.4.0
+  checksum: 813a71728b35a4fbfd64dba719f04726d9133c67b577fcd951b7028c4a675a13ee34e69beb82d621f87bf81f5d4f135c4c44be0448550c7db728547244ef71fc
+  languageName: node
+  linkType: hard
+
 "balanced-match@npm:^1.0.0":
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
@@ -2632,6 +2641,7 @@ __metadata:
     "@relayx/wallet": ^5.0.4
     "@types/node": ^18.11.18
     "@types/webextension-polyfill": ^0.10.0
+    async-mutex: ^0.4.0
     buffer: ^5.5.0
     parcel: ^2.8.3
     tslib: ^2.4.1
