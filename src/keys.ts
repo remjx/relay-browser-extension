@@ -1,54 +1,13 @@
-import ext from 'webextension-polyfill'
 import PrivateKey from "@relayx/crypto/lib/bitcoin/PrivateKey";
-import { entropyToMnemonic, mnemonicToSeed } from '@relayx/crypto/lib/bip39'
-import HDKey from '@relayx/crypto/lib/hdkey'
 import { sign, toDer } from '@relayx/crypto/lib/bitcoin/signature';
 import {SIGHASH_ALL, SIGHASH_FORKID} from '@relayx/crypto/lib/bitcoin/sighash'
 import { serialize } from '@relayx/crypto/lib/bitcoin/script';
 import BufferWriter from '@relayx/crypto/lib/bitcoin/BufferWriter';
 import { KeyStorage } from "@relayx/wallet/lib/auth";
-import {get, set} from './storage'
- 
-const cache = new Map<string, KEYS>();
+import {get, set, clear} from './storage'
+import { getKeys } from "./deriveKeys";
 
-interface KEYS {
-  identity: PrivateKey;
-  receive: PrivateKey;
-  change: PrivateKey;
-  run: PrivateKey;
-  baton: PrivateKey;
-  receiveAddress: string;
-  changeAddress: string;
-  runAddress: string;
-  batonAddress: string;
-}
 
-export async function getKeysFromEntropy(entropy: string): Promise<KEYS> {
-  const seed = await mnemonicToSeed(entropyToMnemonic(entropy), "");
-  const hdkey = HDKey.fromMasterSeed(seed);
-  const identity = new PrivateKey((await hdkey.derive("m/0'/236'/0'/0/0")).privateKey.toString("hex"));
-  const receive = new PrivateKey((await hdkey.derive("m/44'/236'/0'/0/0")).privateKey.toString("hex"))
-  const change = new PrivateKey((await hdkey.derive("m/44'/236'/0'/1/0")).privateKey.toString("hex"))
-  const run = new PrivateKey((await hdkey.derive("m/44'/236'/0'/2/0")).privateKey.toString("hex"));
-  const baton = new PrivateKey((await hdkey.derive("m/44'/236'/0'/3/0")).privateKey.toString("hex"));
-  return {
-    identity,
-    receive,
-    change,
-    run,
-    baton,
-    receiveAddress: receive.toPublicKey().toAddress().toString(),
-    changeAddress: change.toPublicKey().toAddress().toString(),
-    runAddress: run.toPublicKey().toAddress().toString(),
-    batonAddress: baton.toPublicKey().toAddress().toString()
-  };
-}
-
-export async function getKeys(entropy: string): Promise<KEYS> {
-  if (!cache.has(entropy))
-    cache.set(entropy, await getKeysFromEntropy(entropy));
-  return cache.get(entropy)!;
-}
 const keys: KeyStorage = {
   async hasKeys(): Promise<boolean> {
     return !!(await this.getEntropy())
@@ -64,7 +23,7 @@ const keys: KeyStorage = {
     return true
   },
   async logout(): Promise<boolean> {
-    await ext.storage.local.clear()
+    await clear()
     return true
   },
   async getIdentity(): Promise<{
