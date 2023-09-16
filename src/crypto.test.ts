@@ -1,6 +1,8 @@
-import { it, expect } from '@jest/globals';
-import { getKeysFromEntropy } from './deriveKeys';
+import { it, expect, describe } from 'vitest';
+import {hex} from '@scure/base'
+import { getKeysFromEntropy, signMessage } from './crypto';
 
+describe("getKeysFromEntropy", () => {
 it("should correctly derive keys", async () => {
   const keys = await getKeysFromEntropy('0000000000000000000000000000000000000000000000000000000000000000')
   expect(keys.receiveAddress).toEqual('1CdVnYjyzhd9puUw8unH4tLUDEcykRh7Ro')
@@ -12,4 +14,13 @@ it("should correctly derive keys", async () => {
   expect(keys.change.toWIF()).toEqual('L5JJLpBpSbCHhsZBvEghrBnLvu9s6dEnXJNBjiVuohA1oCopUdLe')
   expect(keys.run.toWIF()).toEqual('KyKvpgVjRfGWZaEdXe8Err55dpku9QTnjHK4B3uGeybiE1EtHMfm')
   expect(keys.baton.toWIF()).toEqual('L3dQZNaoxSHcQJKXcaMWHiwBFQXwbjjnENKMyx8H6CkEQRwqqgQc')
+})
+})
+
+describe("signMessage", () => {
+  it("should sign message correctly", async () => {
+    const keys = await getKeysFromEntropy('0000000000000000000000000000000000000000000000000000000000000000')
+    const message = await signMessage(hex.decode('ffff'), keys.identity)
+    expect( message).toEqual('ILiN3P/WtuGzg5SLfjzfGxIMklfHUNh0oKCKRuvmNAQkMoAM//n4dDVIZocjJn4jFn0Z40DwEGRAHuCOdE7i0lc=')
+  })
 })

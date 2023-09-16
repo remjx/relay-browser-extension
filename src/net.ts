@@ -1,6 +1,5 @@
-import { reverseBuffer } from "@relayx/crypto/lib/bitcoin/BufferWriter";
-import { sha256sha256 } from '@relayx/crypto/lib/bitcoin/crypto'
-import { sign as signMessage } from "@relayx/crypto/lib/bitcoin/message";
+import {hex} from '@scure/base'
+import { sha256sha256, signMessage } from './crypto'
 
 import { WhiteList } from "@relayx/wallet/lib/api";
 import { KeyStorage, NetworkApi } from "@relayx/wallet/lib/auth";
@@ -44,7 +43,7 @@ const net: NetworkApi = {
     rawtx: string,
     refs: { paymail: string; ref: string }[]
   ): Promise<{ message?: { code?: number }; txid?: string }> {
-    const txid = reverseBuffer(sha256sha256(Buffer.from(rawtx, "hex")));
+    const txid = sha256sha256(hex.decode(rawtx)).reverse();
 
     const { identityKey, paymail } = await keys.getIdentity();
 

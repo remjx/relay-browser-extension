@@ -5,7 +5,7 @@ import { serialize } from '@relayx/crypto/lib/bitcoin/script';
 import BufferWriter from '@relayx/crypto/lib/bitcoin/BufferWriter';
 import { KeyStorage } from "@relayx/wallet/lib/auth";
 import {get, set, clear} from './storage'
-import { getKeys } from "./deriveKeys";
+import { getKeys } from "./crypto";
 
 
 const keys: KeyStorage = {
