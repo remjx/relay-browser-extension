@@ -2,10 +2,10 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  "transform": {
+  transform: {
     "^.+\\.[tj]s$": ["ts-jest", {
-      "tsconfig": {
-        "allowJs": true
+      tsconfig: {
+        allowJs: true
       }
     }],
   },
