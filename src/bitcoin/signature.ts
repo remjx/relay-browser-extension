@@ -1,9 +1,9 @@
-import { BNToBuffer } from "./utils";
+import { etc } from '@noble/secp256k1'
 
 /* From @relayx/crypto src/bitcoin/signature.ts */
 export function toDer(r: bigint, s: bigint) {
-    const rnbuf = BNToBuffer(r);
-    const snbuf = BNToBuffer(s);
+    const rnbuf = etc.numberToBytesBE(r);
+    const snbuf = etc.numberToBytesBE(s);
   
     const rneg = !!(rnbuf[0] & 0x80);
     const sneg = !!(snbuf[0] & 0x80);
