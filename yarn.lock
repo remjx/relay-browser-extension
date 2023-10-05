@@ -3399,7 +3399,6 @@ __metadata:
     "@types/webextension-polyfill": ^0.10.0
     async-mutex: ^0.4.0
     buffer: ^5.5.0
-    jsbi: ^4.3.0
     parcel: ^2.8.3
     ts-jest: ^29.1.1
     tslib: ^2.6.2
