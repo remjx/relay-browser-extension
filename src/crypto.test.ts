@@ -1,4 +1,4 @@
-import { it, expect, describe } from '@jest/globals';
+import { it, expect, describe } from 'vitest';
 import {hex} from '@scure/base'
 import { getKeysFromEntropy, signMessage } from './crypto';
 

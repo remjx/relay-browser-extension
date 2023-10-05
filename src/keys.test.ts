@@ -1,7 +1,7 @@
-import { it, expect, describe } from '@jest/globals';
+import { it, expect, describe, vi } from 'vitest';
 import * as keysStorage from './keys';
 
-jest.mock('./storage')
+vi.mock('./storage')
 
 describe("keys.sign()", () => {
   it("signs tx correctly", async () => {
