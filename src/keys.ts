@@ -1,12 +1,12 @@
 import PrivateKey from "@relayx/crypto/lib/bitcoin/PrivateKey";
-import { sign, toDer } from '@relayx/crypto/lib/bitcoin/signature';
 import {SIGHASH_ALL, SIGHASH_FORKID} from '@relayx/crypto/lib/bitcoin/sighash'
 import { serialize } from '@relayx/crypto/lib/bitcoin/script';
 import BufferWriter from '@relayx/crypto/lib/bitcoin/BufferWriter';
 import { KeyStorage } from "@relayx/wallet/lib/auth";
 import {get, set, clear} from './storage'
 import { getKeys } from "./crypto";
-
+import { sign } from '@noble/secp256k1'
+import { toDer } from "./bitcoin/signature";
 
 const keys: KeyStorage = {
   async hasKeys(): Promise<boolean> {
@@ -74,8 +74,8 @@ const keys: KeyStorage = {
     }
     const pubkey = privateKey.toPublicKey().toBuffer();
 
-    const [r, s] = sign(sighash, privateKey, "little");
-
+    const { r, s } = sign(sighash.toString('hex'), privateKey.bn.toString(16));
+    
     return serialize([
       Buffer.concat([
         toDer(r, s),
