@@ -9,5 +9,6 @@ module.exports = {
       }
     }],
   },
-  transformIgnorePatterns: ["node_modules/(?!(@noble/secp256k1))"]
+  transformIgnorePatterns: ["node_modules/(?!(@noble/secp256k1))"],
+  setupFilesAfterEnv: ['./jest.setup.js'],
 };
