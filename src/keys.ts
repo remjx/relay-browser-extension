@@ -5,8 +5,11 @@ import BufferWriter from '@relayx/crypto/lib/bitcoin/BufferWriter';
 import { KeyStorage } from "@relayx/wallet/lib/auth";
 import {get, set, clear} from './storage'
 import { getKeys } from "./crypto";
-import { sign } from '@noble/secp256k1'
+import { getPublicKey, sign, etc, ProjectivePoint } from '@noble/secp256k1'
+import {hex} from '@scure/base'
 import { toDer } from "./bitcoin/signature";
+import {signMessage} from './crypto'
+import { encrypt , decrypt} from "./ecies";
 
 const keys: KeyStorage = {
   async hasKeys(): Promise<boolean> {
@@ -27,18 +30,18 @@ const keys: KeyStorage = {
     return true
   },
   async getIdentity(): Promise<{
-    identityKey: PrivateKey;
+    pubkey: Buffer;
     paymail: string;
   }> {
     const keys = getKeys(await this.getEntropy())
     return {
-      identityKey: (await keys).identity,
+      pubkey: Buffer.from(getPublicKey( (await keys).identity)),
       paymail: (await get<string>('PAYMAIL'))
     }
   },
   async getRunOwner(): Promise<PrivateKey> {
     const keys = await getKeys(await this.getEntropy())
-    return keys.run
+    return new PrivateKey(hex.encode( etc.numberToBytesBE( keys.run)))
   },
   async getNextChange(): Promise<[string, number]> {
     const keys = await getKeys(await this.getEntropy())
@@ -58,7 +61,7 @@ const keys: KeyStorage = {
   },
   async sign(sighash: Buffer, chain: number, index: number): Promise<Buffer> {
     const keys = await getKeys(await this.getEntropy());
-    let privateKey: PrivateKey;
+    let privateKey: bigint;
     if (chain === 0) {
       privateKey = keys.receive
     } else if (chain === -1) {
@@ -72,18 +75,34 @@ const keys: KeyStorage = {
     } else {
       privateKey = keys.change
     }
-    const pubkey = privateKey.toPublicKey().toBuffer();
+    const pubkey = getPublicKey(privateKey) ;
 
-    const { r, s } = sign(sighash.toString('hex'), privateKey.bn.toString(16));
-    
+    const { r, s } = sign(sighash.toString('hex'), etc.numberToBytesBE(privateKey));
+
     return serialize([
       Buffer.concat([
         toDer(r, s),
         new BufferWriter().writeUInt8(SIGHASH_ALL | SIGHASH_FORKID).concat()
       ]),
-      pubkey
+      Buffer.from(pubkey)
     ]);
   },
+  async signMessage(message: Buffer, pubkey: Buffer): Promise<string> {
+    const keys = await getKeys(await this.getEntropy())
+    return signMessage(message, keys.identity)
+  },
+  async encrypt(message: Buffer, pubkey: Buffer, targetPubkey: Buffer): Promise<Buffer> {
+    const keys = await getKeys(await this.getEntropy())
+    const targetPub = ProjectivePoint.fromHex(targetPubkey)
+
+    return encrypt(keys.identity, targetPub, message)
+  },
+  async decrypt(message: Buffer, pubkey: Buffer): Promise<Buffer> {
+    const keys = await getKeys(await this.getEntropy())
+
+    return decrypt(keys.identity, message)
+
+  }
 }
 
 export default keys

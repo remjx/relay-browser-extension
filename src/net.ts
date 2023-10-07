@@ -1,5 +1,5 @@
 import {hex} from '@scure/base'
-import { sha256sha256, signMessage } from './crypto'
+import { sha256sha256 } from './crypto'
 
 import { WhiteList } from "@relayx/wallet/lib/api";
 import { KeyStorage, NetworkApi } from "@relayx/wallet/lib/auth";
@@ -45,7 +45,7 @@ const net: NetworkApi = {
   ): Promise<{ message?: { code?: number }; txid?: string }> {
     const txid = sha256sha256(hex.decode(rawtx)).reverse();
 
-    const { identityKey, paymail } = await keys.getIdentity();
+    const { pubkey, paymail } = await keys.getIdentity();
 
     const data = await POST(
       "/v1/broadcast",
@@ -54,8 +54,8 @@ const net: NetworkApi = {
         refs,
         meta: {
           sender: paymail,
-          pubkey: identityKey.toPublicKey().toString(),
-          signature: signMessage(txid, identityKey)
+          pubkey: pubkey.toString('hex'),
+          signature: keys.signMessage(Buffer.from(txid), pubkey)
         }
       },
     );
