@@ -49,7 +49,7 @@ describe("ECIES", function () {
   it("encrypts", async function () {
     const ciphertext = await encrypt(
         jsbiToNativeBigInt(aliceKey.bn),
-        ProjectivePoint.fromPrivateKey(jsbiToNativeBigInt(aliceKey.bn)),
+        ProjectivePoint.fromHex(aliceKey.toPublicKey().toString()),
         Buffer.from(message)
     );
     expect(Buffer.isBuffer(ciphertext)).toEqual(true);
@@ -89,7 +89,7 @@ describe("ECIES", function () {
     const secret = "some secret message!!!";
     const e1 = await encrypt(
         jsbiToNativeBigInt(aliceKey.bn),
-        ProjectivePoint.fromPrivateKey(jsbiToNativeBigInt(aliceKey.bn)),
+        ProjectivePoint.fromHex(aliceKey.toPublicKey().toString()),
         Buffer.from(secret)
     );
     const decrypted = (await decrypt(jsbiToNativeBigInt(bobKey.bn), e1)).toString();
